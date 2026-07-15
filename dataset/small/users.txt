@@ -1,0 +1,8 @@
+1|alice|Python developer interested in graph algorithms and open-source tools.
+2|bob|Data analyst exploring networks, visualization, and machine learning.
+3|carol|Backend engineer who enjoys databases, distributed systems, and Python.
+4|dave|Computer science student learning algorithms and data structures.
+5|erin|Researcher studying online communities and information retrieval.
+6|frank|Frontend developer interested in accessibility and user experience.
+7|grace|Technical writer covering software engineering and developer education.
+8|heidi|Security engineer interested in privacy, authentication, and safe systems.
