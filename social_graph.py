@@ -101,8 +101,11 @@ class SocialGraph:
         if not line:
             return
 
-        raw_id, username, bio = line.split("|", 2)
-        user_id = int(raw_id.strip())
+        try:
+            raw_id, username, bio = line.split("|", 2)
+            user_id = int(raw_id.strip())
+        except ValueError:
+            return
 
         username = username.strip()
         if not username:

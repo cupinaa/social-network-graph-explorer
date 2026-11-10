@@ -41,6 +41,26 @@ class SocialGraphTests(unittest.TestCase):
             self.assertFalse(graph.add_follow("alice", "carol")[0])
             self.assertAlmostEqual(sum(graph.pagerank.values()), 1.0)
 
+    def test_malformed_user_lines_are_skipped(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            folder = Path(directory)
+            (folder / "users.txt").write_text(
+                "1|alice|python graphs\n"
+                "NOT A VALID LINE\n"
+                "abc|bob|data\n"
+                "2|carol|music\n",
+                encoding="utf-8",
+            )
+            (folder / "connections.txt").write_text("1|2\n", encoding="utf-8")
+            (folder / "blocked.txt").write_text("", encoding="utf-8")
+
+            graph, report = SocialGraph.build_from_text_files(folder)
+
+            self.assertEqual(report.users_loaded, 2)
+            self.assertIn("alice", graph.users_by_username)
+            self.assertIn("carol", graph.users_by_username)
+            self.assertNotIn("bob", graph.users_by_username)
+
 
 if __name__ == "__main__":
     unittest.main()
